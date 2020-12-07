@@ -1,0 +1,79 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30621.155
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LCMDB.Servicios.IISExtractor", "LCMDB.Servicios.IISExtractor\LCMDB.Servicios.IISExtractor.csproj", "{BEC749AE-125B-462F-8941-5B067C963A23}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NETCore.Base.3.0", "NETCore.Base.3.0\NETCore.Base.3.0.csproj", "{B39FD329-E3B0-4846-8BD9-E04A0676A3E8}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LCMDB.WorkerServices.ServidoresExtractor", "LCMDB.WorkerServices.ServidoresExtractor\LCMDB.WorkerServices.ServidoresExtractor.csproj", "{F0F2793F-CBA4-4234-98F0-2C2429611AD1}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ServiciosWeb", "ServiciosWeb", "{ED1B0943-24BB-4787-AA8F-6FAFE6EA6F4B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WorkerServices", "WorkerServices", "{8B89E858-E47B-4204-8BAD-855EF9BFE394}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LCMDB.BD", "LCMDB.BD\LCMDB.BD.csproj", "{BF02A814-676C-49EF-B17D-0EC64E634234}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LCMDB.Utilidades", "LCMDB.Utilidades\LCMDB.Utilidades.csproj", "{BDF44C0E-0207-4888-B770-B88FB2FF1105}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolucionesAuxiliares", "SolucionesAuxiliares", "{351D254C-587B-4C0B-A431-DAD6AD995263}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SaltwaterTaffy", "SaltwaterTaffy\SaltwaterTaffy.csproj", "{718DBA7E-6513-4165-B3D6-9815B4083BAE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LCMDB.RegistroEventos", "LCMDB.RegistroEventos\LCMDB.RegistroEventos.csproj", "{4DAB40E8-4224-47A5-A3D2-3A8D79FEF0ED}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LCMDB.WorkerServices.ServidorExtractorApi", "LCMDB.WorkerServices.ServidorExtractorApi\LCMDB.WorkerServices.ServidorExtractorApi.csproj", "{062E6AA6-3F30-477C-92E1-757EADE230A2}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BEC749AE-125B-462F-8941-5B067C963A23}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BEC749AE-125B-462F-8941-5B067C963A23}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BEC749AE-125B-462F-8941-5B067C963A23}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BEC749AE-125B-462F-8941-5B067C963A23}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B39FD329-E3B0-4846-8BD9-E04A0676A3E8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B39FD329-E3B0-4846-8BD9-E04A0676A3E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B39FD329-E3B0-4846-8BD9-E04A0676A3E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B39FD329-E3B0-4846-8BD9-E04A0676A3E8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F0F2793F-CBA4-4234-98F0-2C2429611AD1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F0F2793F-CBA4-4234-98F0-2C2429611AD1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F0F2793F-CBA4-4234-98F0-2C2429611AD1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F0F2793F-CBA4-4234-98F0-2C2429611AD1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BF02A814-676C-49EF-B17D-0EC64E634234}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BF02A814-676C-49EF-B17D-0EC64E634234}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BF02A814-676C-49EF-B17D-0EC64E634234}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BF02A814-676C-49EF-B17D-0EC64E634234}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BDF44C0E-0207-4888-B770-B88FB2FF1105}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BDF44C0E-0207-4888-B770-B88FB2FF1105}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BDF44C0E-0207-4888-B770-B88FB2FF1105}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BDF44C0E-0207-4888-B770-B88FB2FF1105}.Release|Any CPU.Build.0 = Release|Any CPU
+		{718DBA7E-6513-4165-B3D6-9815B4083BAE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{718DBA7E-6513-4165-B3D6-9815B4083BAE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{718DBA7E-6513-4165-B3D6-9815B4083BAE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{718DBA7E-6513-4165-B3D6-9815B4083BAE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4DAB40E8-4224-47A5-A3D2-3A8D79FEF0ED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4DAB40E8-4224-47A5-A3D2-3A8D79FEF0ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4DAB40E8-4224-47A5-A3D2-3A8D79FEF0ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4DAB40E8-4224-47A5-A3D2-3A8D79FEF0ED}.Release|Any CPU.Build.0 = Release|Any CPU
+		{062E6AA6-3F30-477C-92E1-757EADE230A2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{062E6AA6-3F30-477C-92E1-757EADE230A2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{062E6AA6-3F30-477C-92E1-757EADE230A2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{062E6AA6-3F30-477C-92E1-757EADE230A2}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{BEC749AE-125B-462F-8941-5B067C963A23} = {ED1B0943-24BB-4787-AA8F-6FAFE6EA6F4B}
+		{F0F2793F-CBA4-4234-98F0-2C2429611AD1} = {8B89E858-E47B-4204-8BAD-855EF9BFE394}
+		{718DBA7E-6513-4165-B3D6-9815B4083BAE} = {351D254C-587B-4C0B-A431-DAD6AD995263}
+		{062E6AA6-3F30-477C-92E1-757EADE230A2} = {8B89E858-E47B-4204-8BAD-855EF9BFE394}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D62388E5-EBB7-4A2E-B734-5EBD194A5C2B}
+	EndGlobalSection
+EndGlobal

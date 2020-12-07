@@ -1,0 +1,29 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <NoWarn>1701;1702;NU1605</NoWarn>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <NoWarn>1701;1702;NU1605</NoWarn>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Hosting.WindowsServices" Version="5.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\LCMDB.BD\LCMDB.BD.csproj" />
+    <ProjectReference Include="..\LCMDB.RegistroEventos\LCMDB.RegistroEventos.csproj" />
+    <ProjectReference Include="..\LCMDB.Utilidades\LCMDB.Utilidades.csproj" />
+    <ProjectReference Include="..\NETCore.Base.3.0\NETCore.Base.3.0.csproj" />
+    <ProjectReference Include="..\SaltwaterTaffy\SaltwaterTaffy.csproj" />
+  </ItemGroup>
+
+
+</Project>

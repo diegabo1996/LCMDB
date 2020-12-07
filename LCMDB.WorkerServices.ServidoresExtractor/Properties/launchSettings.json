@@ -1,0 +1,10 @@
+﻿{
+  "profiles": {
+    "LCMDB.WorkerServices.ServidoresExtractor": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "DOTNET_ENVIRONMENT": "Development"
+      }
+    }
+  }
+}
