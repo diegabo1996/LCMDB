@@ -1,5 +1,7 @@
+using LCMDB.BD.Contextos.LCMDB;
 using LCMDB.WorkerServices.ServidoresExtractorApi;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -19,6 +21,8 @@ namespace LCMDB.WorkerServices.ServidorExtractorApi
 
         public static void Main(string[] args)
         {
+            CMDBContexto contexto = new CMDBContexto();
+            contexto.Database.Migrate();
             CreateHostBuilder(args).Build().Run();
         }
 

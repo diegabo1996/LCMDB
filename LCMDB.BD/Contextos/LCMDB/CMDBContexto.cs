@@ -22,6 +22,7 @@ namespace LCMDB.BD.Contextos.LCMDB
         public DbSet<Usuarios> Cnf_UsuariosEjecucion { get; set; }
         public DbSet<RegistroCambiosServidores> Reg_RegistroCambiosServidores { get; set; }
         public DbSet<RegistroEnLineaServidores> Reg_RegistroEnLineaServidores { get; set; }
+        public DbSet<SO> Inv_SO_Servidores { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

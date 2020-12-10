@@ -21,6 +21,7 @@ namespace LCMDB.BD.Contextos.LCMDB.Modelos.v1_0
         public DateTime FechaModificacion { get; set; }
         public ICollection<RegistroCambiosServidores> RegistroCambiosServidores { get; set; }
         public ICollection<RegistroEnLineaServidores> RegistroEnLineaServidores { get; set; }
+        public ICollection<SO> RegistroSOServidores { get; set; }
 
     }
 }

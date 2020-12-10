@@ -4,14 +4,16 @@ using LCMDB.BD.Contextos.LCMDB;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace LCMDB.BD.Migrations
 {
     [DbContext(typeof(CMDBContexto))]
-    partial class CMDBContextoModelSnapshot : ModelSnapshot
+    [Migration("20201208165024_CorreccionPuertos")]
+    partial class CorreccionPuertos
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -143,41 +145,6 @@ namespace LCMDB.BD.Migrations
                     b.ToTable("Reg_RegistroEnLineaServidores");
                 });
 
-            modelBuilder.Entity("LCMDB.BD.Contextos.LCMDB.Modelos.v1_0.SO", b =>
-                {
-                    b.Property<int>("IdRegSO")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .UseIdentityColumn();
-
-                    b.Property<int>("Certeza")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Familia")
-                        .HasColumnType("varchar(250)");
-
-                    b.Property<DateTime>("FechaModificacion")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("FechaRegistro")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Generacion")
-                        .HasColumnType("varchar(250)");
-
-                    b.Property<int>("IdServidor")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Nombre")
-                        .HasColumnType("varchar(250)");
-
-                    b.HasKey("IdRegSO");
-
-                    b.HasIndex("IdServidor");
-
-                    b.ToTable("Inv_SO_Servidores");
-                });
-
             modelBuilder.Entity("LCMDB.BD.Contextos.LCMDB.Modelos.v1_0.SegmentoRed", b =>
                 {
                     b.Property<int>("IdSegmento")
@@ -283,17 +250,6 @@ namespace LCMDB.BD.Migrations
                 {
                     b.HasOne("LCMDB.BD.Contextos.LCMDB.Modelos.v1_0.Servidor", "Servidor")
                         .WithMany("RegistroEnLineaServidores")
-                        .HasForeignKey("IdServidor")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Servidor");
-                });
-
-            modelBuilder.Entity("LCMDB.BD.Contextos.LCMDB.Modelos.v1_0.SO", b =>
-                {
-                    b.HasOne("LCMDB.BD.Contextos.LCMDB.Modelos.v1_0.Servidor", "Servidor")
-                        .WithMany()
                         .HasForeignKey("IdServidor")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();

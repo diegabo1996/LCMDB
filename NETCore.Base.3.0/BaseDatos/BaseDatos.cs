@@ -82,7 +82,7 @@ namespace BCP.NETCore.Base
                 throw Ex;
             }
         }
-        public string ObtenerValor(DbContext context, string sqlQuery)
+        public static string ObtenerValor(DbContext context, string sqlQuery)
         {
             RegistroLogs Lg = new RegistroLogs();
             try

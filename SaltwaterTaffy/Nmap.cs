@@ -556,8 +556,8 @@ namespace SaltwaterTaffy
         /// <returns>The path to the file if it is found, the empty string otherwise</returns>
         private static string LocateExecutable(string filename)
         {
-            string path = Environment.CurrentDirectory;
-            string[] folders = Directory.GetDirectories(path); 
+            string path = Environment.GetEnvironmentVariable("path");
+            string[] folders = path.Split(';');
 
             foreach (string folder in folders)
             {
