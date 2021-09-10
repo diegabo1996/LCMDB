@@ -30,6 +30,6 @@ namespace LCMDB.WorkerServices.ServidoresExtractor
                     //services.AddSingleton(configuracion);
                     services.AddHostedService<Worker>();
                     services.AddAutoMapper(typeof(AutoMapperProfile).Assembly);
-                });
+                }).UseWindowsService();
     }
 }
