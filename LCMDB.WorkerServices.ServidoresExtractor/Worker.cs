@@ -54,7 +54,7 @@ namespace LCMDB.WorkerServices.ServidoresExtractor
                 {
                     if (DateTime.Now.Ticks > ProximaEjecucion.Ticks && !Ocupado)
                     {
-                        Logs.RegistrarEvento(TipoEvento.Informativo, "Iniciando el proceso...");
+                        Logs.RegistrarEvento(TipoEvento.Informativo, "Iniciando el procesoX...");
                         Ocupado = true;
                         var Vnets = EstablecerEjecucion();
                         Logs.RegistrarEvento(TipoEvento.Informativo, "VNets para el proceso...", Vnets);
