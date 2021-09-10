@@ -26,6 +26,7 @@ namespace SaltwaterTaffy
         /// <param name="result">The result of parsing an nmaprun </param>
         public ScanResult(nmaprun result)
         {
+            Archivo = result.xmloutputversion;
             Total = int.Parse(result.runstats.hosts.total);
             Up = int.Parse(result.runstats.hosts.up);
             Down = int.Parse(result.runstats.hosts.down);
@@ -48,7 +49,7 @@ namespace SaltwaterTaffy
                             })
                         : Enumerable.Empty<Host>();
         }
-
+        public string Archivo { get; set; }
         public int Total { get; set; }
         public int Up { get; set; }
         public int Down { get; set; }
@@ -319,9 +320,17 @@ namespace SaltwaterTaffy
         public ScanResult PortScan()
         {
             NmapContext ctx = _portScanCommon(ScanType.Default, null);
-            return new ScanResult(ctx.Run());
+            var Resultado= new ScanResult(ctx.Run());
+            Resultado.Archivo = ctx.OutputPath;
+            return Resultado;
         }
-
+        public ScanResult PortScan(string Archivo)
+        {
+            NmapContext ctx = _portScanCommon(ScanType.Default, null);
+            var Resultado = new ScanResult(ctx.Run(Archivo));
+            Resultado.Archivo = ctx.OutputPath;
+            return Resultado;
+        }
         /// <summary>
         ///     Perform the desired scan with service detection and OS detection.
         /// </summary>

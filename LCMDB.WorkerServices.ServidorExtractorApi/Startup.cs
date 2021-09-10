@@ -1,3 +1,5 @@
+using AutoMapper;
+using LCMDB.WorkerServices.ServidoresExtractor;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -26,6 +28,7 @@ namespace LCMDB.WorkerServices.ServidorExtractorApi
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+            services.AddAutoMapper(typeof(AutoMapperProfile).Assembly);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -41,6 +44,7 @@ namespace LCMDB.WorkerServices.ServidorExtractorApi
             app.UseRouting();
 
             app.UseAuthorization();
+
 
             app.UseEndpoints(endpoints =>
             {

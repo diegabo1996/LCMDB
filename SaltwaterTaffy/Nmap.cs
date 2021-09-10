@@ -567,7 +567,11 @@ namespace SaltwaterTaffy
                     return combined;
                 }
             }
-
+            string combinedAux = System.IO.Path.Combine(@"C:\Program Files (x86)\Nmap", filename);
+            if (File.Exists(combinedAux))
+            {
+                return combinedAux;
+            }
             return string.Empty;
         }
 
@@ -632,6 +636,17 @@ namespace SaltwaterTaffy
             }
 
             return Serialization.DeserializeFromFile<nmaprun>(OutputPath);
+        }
+        public virtual nmaprun Run(string Archivo)
+        {
+            if (string.IsNullOrEmpty(Archivo))
+            {
+                throw new ApplicationException("Nmap output file path is null or empty");
+            }
+
+            Options[NmapFlag.XmlOutput] = OutputPath;
+
+            return Serialization.DeserializeFromFile<nmaprun>(Archivo);
         }
     }
 }

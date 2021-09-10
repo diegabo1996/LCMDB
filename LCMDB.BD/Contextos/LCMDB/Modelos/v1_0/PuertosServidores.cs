@@ -13,8 +13,9 @@ namespace LCMDB.BD.Contextos.LCMDB.Modelos.v1_0
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int IdPuerto { get; set; }
         [ForeignKey("Servidor")]
-        public int IdServidor { get; set; }
+        public string IP { get; set; }
         public virtual Servidor Servidor { get; set; }
+        public int IdRegistro { get; set; }
         public int Puerto { get; set; }
         public bool Habilitado { get; set; }
         public ProtocolType TipoProtocolo { get; set; }
@@ -27,7 +28,5 @@ namespace LCMDB.BD.Contextos.LCMDB.Modelos.v1_0
         [Column(TypeName = "varchar(250)")]
         public string Version { get; set; }
         public DateTime FechaRegistro { get; set; }
-        public DateTime FechaModificacion { get; set; }
-
     }
 }

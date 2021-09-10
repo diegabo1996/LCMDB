@@ -4,14 +4,16 @@ using LCMDB.BD.Contextos.LCMDB;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace LCMDB.BD.Migrations
 {
     [DbContext(typeof(CMDBContexto))]
-    partial class CMDBContextoModelSnapshot : ModelSnapshot
+    [Migration("20210908165127_HistoricosX")]
+    partial class HistoricosX
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -156,9 +158,6 @@ namespace LCMDB.BD.Migrations
                         .HasColumnType("int")
                         .UseIdentityColumn();
 
-                    b.Property<string>("Detalle")
-                        .HasColumnType("varchar(500)");
-
                     b.Property<DateTime>("FechaHoraFin")
                         .HasColumnType("datetime2");
 
@@ -167,9 +166,6 @@ namespace LCMDB.BD.Migrations
 
                     b.Property<bool>("Finalizado")
                         .HasColumnType("bit");
-
-                    b.Property<int>("IdSegmento")
-                        .HasColumnType("int");
 
                     b.Property<string>("ServicioID")
                         .HasColumnType("varchar(5)");
@@ -193,14 +189,11 @@ namespace LCMDB.BD.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("IP")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ServidorIP")
                         .HasColumnType("varchar(15)");
 
                     b.HasKey("IdRegistroEnLinea");
 
-                    b.HasIndex("ServidorIP");
+                    b.HasIndex("IP");
 
                     b.ToTable("Reg_RegistroEnLineaServidores");
                 });
@@ -402,9 +395,11 @@ namespace LCMDB.BD.Migrations
 
             modelBuilder.Entity("LCMDB.BD.Contextos.LCMDB.Modelos.v1_0.RegistroEnLineaServidores", b =>
                 {
-                    b.HasOne("LCMDB.BD.Contextos.LCMDB.Modelos.v1_0.Servidor", null)
+                    b.HasOne("LCMDB.BD.Contextos.LCMDB.Modelos.v1_0.Servidor", "Servidor")
                         .WithMany("RegistroEnLineaServidores")
-                        .HasForeignKey("ServidorIP");
+                        .HasForeignKey("IP");
+
+                    b.Navigation("Servidor");
                 });
 
             modelBuilder.Entity("LCMDB.BD.Contextos.LCMDB.Modelos.v1_0.SO", b =>

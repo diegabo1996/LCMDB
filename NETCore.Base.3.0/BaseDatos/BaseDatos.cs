@@ -110,6 +110,34 @@ namespace BCP.NETCore.Base
                 throw Ex;
             }
         }
+        public static bool EjecutarComandoSQL(DbContext context, string sqlQuery)
+        {
+            RegistroLogs Lg = new RegistroLogs();
+            try
+            {
+                DbProviderFactory dbFactory = DbProviderFactories.GetFactory(context.Database.GetDbConnection());
+
+                using (var cmd = dbFactory.CreateCommand())
+                {
+                    string dt = "";
+                    cmd.Connection = context.Database.GetDbConnection();
+                    cmd.CommandType = CommandType.Text;
+                    cmd.CommandText = sqlQuery;
+                    cmd.CommandTimeout = 120;
+                    cmd.Connection.Open();
+                    var Objeto = cmd.ExecuteScalar();
+                    dt = Objeto == null ? "" : Objeto.ToString();
+                    cmd.Connection.Close();
+                    Lg.RegistrarEvento(TipoEvento.Informativo, dt);
+                    return true;
+                }
+            }
+            catch (Exception Ex)
+            {
+                Lg.RegistrarEvento(TipoEvento.Error, "Fallo la ejecución del query \"" + sqlQuery + "\", revise y re-intente nuevamente!", Ex, "Datos de conexion: " + Newtonsoft.Json.JsonConvert.SerializeObject(context.Database.GetDbConnection()));
+                return false;
+            }
+        }
         public string ObtenerValor(string sqlQuery)
         {
             RegistroLogs Lg = new RegistroLogs();
@@ -138,5 +166,6 @@ namespace BCP.NETCore.Base
                 throw Ex;
             }
         }
+
     }
 }

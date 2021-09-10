@@ -4,14 +4,16 @@ using LCMDB.BD.Contextos.LCMDB;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace LCMDB.BD.Migrations
 {
     [DbContext(typeof(CMDBContexto))]
-    partial class CMDBContextoModelSnapshot : ModelSnapshot
+    [Migration("20210908233358_DaletedFK")]
+    partial class DaletedFK
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

@@ -25,8 +25,6 @@ namespace LCMDB.BD.Contextos.LCMDB.Modelos.v1_0
         [Column(TypeName = "text")]
         public string? Detalles { get; set; }
         public DateTime FechaRegistro { get; set; }
-        [ForeignKey("Servidor")]
-        public int IdServidor { get; set; }
-        public virtual Servidor Servidor { get; set; }
+        public string IP { get; set; }
     }
 }

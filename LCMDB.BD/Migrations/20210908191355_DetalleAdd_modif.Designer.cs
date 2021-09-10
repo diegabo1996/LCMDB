@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LCMDB.BD.Migrations
 {
     [DbContext(typeof(CMDBContexto))]
-    [Migration("20201208165024_CorreccionPuertos")]
-    partial class CorreccionPuertos
+    [Migration("20210908191355_DetalleAdd_modif")]
+    partial class DetalleAdd_modif
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -22,6 +22,56 @@ namespace LCMDB.BD.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("ProductVersion", "5.0.0");
 
+            modelBuilder.Entity("LCMDB.BD.Contextos.LCMDB.Modelos.v1_0.PuertoServidoresHistorico", b =>
+                {
+                    b.Property<int>("IdRegistroPuerto")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
+
+                    b.Property<DateTime>("FechaRegistro")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("FechaRegistroVolcado")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime2")
+                        .HasDefaultValueSql("getdate()");
+
+                    b.Property<bool>("Habilitado")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("IP")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("IdPuerto")
+                        .HasColumnType("int");
+
+                    b.Property<int>("IdRegistro")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Nombre")
+                        .HasColumnType("varchar(250)");
+
+                    b.Property<string>("Producto")
+                        .HasColumnType("varchar(250)");
+
+                    b.Property<int>("Puerto")
+                        .HasColumnType("int");
+
+                    b.Property<string>("SistemOperativo")
+                        .HasColumnType("varchar(250)");
+
+                    b.Property<int>("TipoProtocolo")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Version")
+                        .HasColumnType("varchar(250)");
+
+                    b.HasKey("IdRegistroPuerto");
+
+                    b.ToTable("Hist_Inv_PuertosServidores");
+                });
+
             modelBuilder.Entity("LCMDB.BD.Contextos.LCMDB.Modelos.v1_0.PuertosServidores", b =>
                 {
                     b.Property<int>("IdPuerto")
@@ -29,16 +79,16 @@ namespace LCMDB.BD.Migrations
                         .HasColumnType("int")
                         .UseIdentityColumn();
 
-                    b.Property<DateTime>("FechaModificacion")
-                        .HasColumnType("datetime2");
-
                     b.Property<DateTime>("FechaRegistro")
                         .HasColumnType("datetime2");
 
                     b.Property<bool>("Habilitado")
                         .HasColumnType("bit");
 
-                    b.Property<int>("IdServidor")
+                    b.Property<string>("IP")
+                        .HasColumnType("varchar(15)");
+
+                    b.Property<int>("IdRegistro")
                         .HasColumnType("int");
 
                     b.Property<string>("Nombre")
@@ -61,7 +111,7 @@ namespace LCMDB.BD.Migrations
 
                     b.HasKey("IdPuerto");
 
-                    b.HasIndex("IdServidor");
+                    b.HasIndex("IP");
 
                     b.ToTable("Inv_PuertosServidores");
                 });
@@ -82,18 +132,21 @@ namespace LCMDB.BD.Migrations
                     b.Property<DateTime>("FechaRegistro")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("IdServidor")
-                        .HasColumnType("int");
+                    b.Property<string>("IP")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("NuevoValor")
                         .HasColumnType("varchar(50)");
+
+                    b.Property<string>("ServidorIP")
+                        .HasColumnType("varchar(15)");
 
                     b.Property<int>("TipoCambio")
                         .HasColumnType("int");
 
                     b.HasKey("IdCambio");
 
-                    b.HasIndex("IdServidor");
+                    b.HasIndex("ServidorIP");
 
                     b.ToTable("Reg_RegistroCambiosServidores");
                 });
@@ -104,6 +157,9 @@ namespace LCMDB.BD.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .UseIdentityColumn();
+
+                    b.Property<string>("Detalle")
+                        .HasColumnType("varchar(500)");
 
                     b.Property<DateTime>("FechaHoraFin")
                         .HasColumnType("datetime2");
@@ -135,14 +191,90 @@ namespace LCMDB.BD.Migrations
                     b.Property<DateTime>("FechaRegistro")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("IdServidor")
-                        .HasColumnType("int");
+                    b.Property<string>("IP")
+                        .HasColumnType("varchar(15)");
 
                     b.HasKey("IdRegistroEnLinea");
 
-                    b.HasIndex("IdServidor");
+                    b.HasIndex("IP");
 
                     b.ToTable("Reg_RegistroEnLineaServidores");
+                });
+
+            modelBuilder.Entity("LCMDB.BD.Contextos.LCMDB.Modelos.v1_0.SO", b =>
+                {
+                    b.Property<int>("IdSORegistro")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
+
+                    b.Property<int>("Certeza")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Familia")
+                        .HasColumnType("varchar(250)");
+
+                    b.Property<DateTime>("FechaRegistro")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Generacion")
+                        .HasColumnType("varchar(250)");
+
+                    b.Property<string>("IP")
+                        .HasColumnType("varchar(15)");
+
+                    b.Property<int>("IdRegistro")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Nombre")
+                        .HasColumnType("varchar(250)");
+
+                    b.HasKey("IdSORegistro");
+
+                    b.HasIndex("IP");
+
+                    b.ToTable("Inv_SO_Servidores");
+                });
+
+            modelBuilder.Entity("LCMDB.BD.Contextos.LCMDB.Modelos.v1_0.SOHistorico", b =>
+                {
+                    b.Property<int>("IdRegistroSO")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
+
+                    b.Property<int>("Certeza")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Familia")
+                        .HasColumnType("varchar(250)");
+
+                    b.Property<DateTime>("FechaRegistro")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("FechaRegistroVolcado")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime2")
+                        .HasDefaultValueSql("getdate()");
+
+                    b.Property<string>("Generacion")
+                        .HasColumnType("varchar(250)");
+
+                    b.Property<string>("IP")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("IdRegistro")
+                        .HasColumnType("int");
+
+                    b.Property<int>("IdSORegistro")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Nombre")
+                        .HasColumnType("varchar(250)");
+
+                    b.HasKey("IdRegistroSO");
+
+                    b.ToTable("Hist_Inv_SO_Servidores");
                 });
 
             modelBuilder.Entity("LCMDB.BD.Contextos.LCMDB.Modelos.v1_0.SegmentoRed", b =>
@@ -170,28 +302,52 @@ namespace LCMDB.BD.Migrations
 
             modelBuilder.Entity("LCMDB.BD.Contextos.LCMDB.Modelos.v1_0.Servidor", b =>
                 {
-                    b.Property<int>("IdServidor")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .UseIdentityColumn();
-
-                    b.Property<DateTime>("FechaModificacion")
-                        .HasColumnType("datetime2");
+                    b.Property<string>("IP")
+                        .HasColumnType("varchar(15)");
 
                     b.Property<DateTime>("FechaRegistro")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("IP")
-                        .IsRequired()
-                        .HasColumnType("varchar(15)");
+                    b.Property<int>("IdRegistro")
+                        .HasColumnType("int");
 
                     b.Property<string>("NombreServidor")
                         .IsRequired()
                         .HasColumnType("varchar(50)");
 
-                    b.HasKey("IdServidor");
+                    b.HasKey("IP");
 
                     b.ToTable("Inv_Servidores");
+                });
+
+            modelBuilder.Entity("LCMDB.BD.Contextos.LCMDB.Modelos.v1_0.ServidoresHistorico", b =>
+                {
+                    b.Property<int>("IdRegistroServidores")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
+
+                    b.Property<DateTime>("FechaRegistro")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("FechaRegistroVolcado")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime2")
+                        .HasDefaultValueSql("getdate()");
+
+                    b.Property<string>("IP")
+                        .HasColumnType("varchar(15)");
+
+                    b.Property<int>("IdRegistro")
+                        .HasColumnType("int");
+
+                    b.Property<string>("NombreServidor")
+                        .IsRequired()
+                        .HasColumnType("varchar(50)");
+
+                    b.HasKey("IdRegistroServidores");
+
+                    b.ToTable("Hist_Inv_Servidores");
                 });
 
             modelBuilder.Entity("LCMDB.BD.Contextos.LCMDB.Modelos.v1_0.Usuarios", b =>
@@ -228,31 +384,32 @@ namespace LCMDB.BD.Migrations
                 {
                     b.HasOne("LCMDB.BD.Contextos.LCMDB.Modelos.v1_0.Servidor", "Servidor")
                         .WithMany()
-                        .HasForeignKey("IdServidor")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("IP");
 
                     b.Navigation("Servidor");
                 });
 
             modelBuilder.Entity("LCMDB.BD.Contextos.LCMDB.Modelos.v1_0.RegistroCambiosServidores", b =>
                 {
-                    b.HasOne("LCMDB.BD.Contextos.LCMDB.Modelos.v1_0.Servidor", "Servidor")
+                    b.HasOne("LCMDB.BD.Contextos.LCMDB.Modelos.v1_0.Servidor", null)
                         .WithMany("RegistroCambiosServidores")
-                        .HasForeignKey("IdServidor")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Servidor");
+                        .HasForeignKey("ServidorIP");
                 });
 
             modelBuilder.Entity("LCMDB.BD.Contextos.LCMDB.Modelos.v1_0.RegistroEnLineaServidores", b =>
                 {
                     b.HasOne("LCMDB.BD.Contextos.LCMDB.Modelos.v1_0.Servidor", "Servidor")
                         .WithMany("RegistroEnLineaServidores")
-                        .HasForeignKey("IdServidor")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("IP");
+
+                    b.Navigation("Servidor");
+                });
+
+            modelBuilder.Entity("LCMDB.BD.Contextos.LCMDB.Modelos.v1_0.SO", b =>
+                {
+                    b.HasOne("LCMDB.BD.Contextos.LCMDB.Modelos.v1_0.Servidor", "Servidor")
+                        .WithMany("RegistroSOServidores")
+                        .HasForeignKey("IP");
 
                     b.Navigation("Servidor");
                 });
@@ -262,6 +419,8 @@ namespace LCMDB.BD.Migrations
                     b.Navigation("RegistroCambiosServidores");
 
                     b.Navigation("RegistroEnLineaServidores");
+
+                    b.Navigation("RegistroSOServidores");
                 });
 #pragma warning restore 612, 618
         }

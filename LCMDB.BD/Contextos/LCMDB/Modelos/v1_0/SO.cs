@@ -10,10 +10,11 @@ namespace LCMDB.BD.Contextos.LCMDB.Modelos.v1_0
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int IdRegSO { get; set; }
+        public int IdSORegistro { get; set; }
         [ForeignKey("Servidor")]
-        public int IdServidor { get; set; }
+        public string IP { get; set; }
         public virtual Servidor Servidor { get; set; }
+        public int IdRegistro { get; set; }
         public int Certeza { get; set; }
         [Column(TypeName = "varchar(250)")]
         public string? Nombre { get; set; }
@@ -22,6 +23,5 @@ namespace LCMDB.BD.Contextos.LCMDB.Modelos.v1_0
         [Column(TypeName = "varchar(250)")]
         public string? Generacion { get; set; }
         public DateTime FechaRegistro { get; set; }
-        public DateTime FechaModificacion { get; set; }
     }
 }
