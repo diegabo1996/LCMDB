@@ -1,6 +1,6 @@
 using System;
 
-namespace LCMDB.Servicios.IISExtractor
+namespace LCMDB.IISExtractor.MicroServicio
 {
     public class WeatherForecast
     {

@@ -1,15 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.30621.155
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31512.422
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LCMDB.Servicios.IISExtractor", "LCMDB.Servicios.IISExtractor\LCMDB.Servicios.IISExtractor.csproj", "{BEC749AE-125B-462F-8941-5B067C963A23}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NETCore.Base.3.0", "NETCore.Base.3.0\NETCore.Base.3.0.csproj", "{B39FD329-E3B0-4846-8BD9-E04A0676A3E8}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LCMDB.WorkerServices.ServidoresExtractor", "LCMDB.WorkerServices.ServidoresExtractor\LCMDB.WorkerServices.ServidoresExtractor.csproj", "{F0F2793F-CBA4-4234-98F0-2C2429611AD1}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ServiciosWeb", "ServiciosWeb", "{ED1B0943-24BB-4787-AA8F-6FAFE6EA6F4B}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ServiciosSatelite", "ServiciosSatelite", "{ED1B0943-24BB-4787-AA8F-6FAFE6EA6F4B}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WorkerServices", "WorkerServices", "{8B89E858-E47B-4204-8BAD-855EF9BFE394}"
 EndProject
@@ -21,9 +19,27 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolucionesAuxiliares", "Sol
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SaltwaterTaffy", "SaltwaterTaffy\SaltwaterTaffy.csproj", "{718DBA7E-6513-4165-B3D6-9815B4083BAE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LCMDB.RegistroEventos", "LCMDB.RegistroEventos\LCMDB.RegistroEventos.csproj", "{4DAB40E8-4224-47A5-A3D2-3A8D79FEF0ED}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LCMDB.RegistroEventos", "LCMDB.RegistroEventos\LCMDB.RegistroEventos.csproj", "{4DAB40E8-4224-47A5-A3D2-3A8D79FEF0ED}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LCMDB.WorkerServices.ServidorExtractorApi", "LCMDB.WorkerServices.ServidorExtractorApi\LCMDB.WorkerServices.ServidorExtractorApi.csproj", "{062E6AA6-3F30-477C-92E1-757EADE230A2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LCMDB.WorkerServices.ServidorExtractorApi", "LCMDB.WorkerServices.ServidorExtractorApi\LCMDB.WorkerServices.ServidorExtractorApi.csproj", "{062E6AA6-3F30-477C-92E1-757EADE230A2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "IISExtractor", "IISExtractor", "{3C674304-38CC-47E0-B537-27AFEFD3212A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ServicioWeb", "ServicioWeb", "{24237D38-023F-447E-A1BC-74580F3177CC}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ServicioProcesador", "ServicioProcesador", "{76A68DC6-1D72-439D-BBD6-F37418C65A5A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LCMDB.IISExtractor.MicroServicio", "LCMDB.IISExtractor.MicroServicio\LCMDB.IISExtractor.MicroServicio.csproj", "{8E7D0615-2430-4B59-8739-AF0D18C6A82A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LCMDB.IISExtractor.ServicioEjecutor", "LCMDB.IISExtractor.ServicioEjecutor\LCMDB.IISExtractor.ServicioEjecutor.csproj", "{0B60F2FC-4EFA-43D6-8A0F-81AEB821E81B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LCMDB.SolucionesAuxiliares.IISExtractor", "LCMDB.SolucionesAuxiliares.IISExtractor\LCMDB.SolucionesAuxiliares.IISExtractor.csproj", "{7AF7E904-50D5-4167-BC99-28518F9E53AB}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PruebasUnitarias", "PruebasUnitarias", "{5F6A537E-9CEB-4B0C-8D8C-EB3092C51269}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LCMDB.PruebasUnitarias.IISExtractor", "LCMDB.PruebasUnitarias.IISExtractor\LCMDB.PruebasUnitarias.IISExtractor.csproj", "{650BFC58-BFBE-4255-89EE-6449D93366D3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LCMDB.PruebasUnitarias.IISExtractor.NET", "LCMDB.PruebasUnitarias.IISExtractor.NET\LCMDB.PruebasUnitarias.IISExtractor.NET.csproj", "{814321A4-FB67-4D5D-8D30-9D6429639BEB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -31,10 +47,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{BEC749AE-125B-462F-8941-5B067C963A23}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{BEC749AE-125B-462F-8941-5B067C963A23}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{BEC749AE-125B-462F-8941-5B067C963A23}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{BEC749AE-125B-462F-8941-5B067C963A23}.Release|Any CPU.Build.0 = Release|Any CPU
 		{B39FD329-E3B0-4846-8BD9-E04A0676A3E8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{B39FD329-E3B0-4846-8BD9-E04A0676A3E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B39FD329-E3B0-4846-8BD9-E04A0676A3E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -63,15 +75,43 @@ Global
 		{062E6AA6-3F30-477C-92E1-757EADE230A2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{062E6AA6-3F30-477C-92E1-757EADE230A2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{062E6AA6-3F30-477C-92E1-757EADE230A2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8E7D0615-2430-4B59-8739-AF0D18C6A82A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8E7D0615-2430-4B59-8739-AF0D18C6A82A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8E7D0615-2430-4B59-8739-AF0D18C6A82A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8E7D0615-2430-4B59-8739-AF0D18C6A82A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0B60F2FC-4EFA-43D6-8A0F-81AEB821E81B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0B60F2FC-4EFA-43D6-8A0F-81AEB821E81B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0B60F2FC-4EFA-43D6-8A0F-81AEB821E81B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0B60F2FC-4EFA-43D6-8A0F-81AEB821E81B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7AF7E904-50D5-4167-BC99-28518F9E53AB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7AF7E904-50D5-4167-BC99-28518F9E53AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7AF7E904-50D5-4167-BC99-28518F9E53AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7AF7E904-50D5-4167-BC99-28518F9E53AB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{650BFC58-BFBE-4255-89EE-6449D93366D3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{650BFC58-BFBE-4255-89EE-6449D93366D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{650BFC58-BFBE-4255-89EE-6449D93366D3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{650BFC58-BFBE-4255-89EE-6449D93366D3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{814321A4-FB67-4D5D-8D30-9D6429639BEB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{814321A4-FB67-4D5D-8D30-9D6429639BEB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{814321A4-FB67-4D5D-8D30-9D6429639BEB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{814321A4-FB67-4D5D-8D30-9D6429639BEB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{BEC749AE-125B-462F-8941-5B067C963A23} = {ED1B0943-24BB-4787-AA8F-6FAFE6EA6F4B}
 		{F0F2793F-CBA4-4234-98F0-2C2429611AD1} = {8B89E858-E47B-4204-8BAD-855EF9BFE394}
 		{718DBA7E-6513-4165-B3D6-9815B4083BAE} = {351D254C-587B-4C0B-A431-DAD6AD995263}
 		{062E6AA6-3F30-477C-92E1-757EADE230A2} = {8B89E858-E47B-4204-8BAD-855EF9BFE394}
+		{3C674304-38CC-47E0-B537-27AFEFD3212A} = {ED1B0943-24BB-4787-AA8F-6FAFE6EA6F4B}
+		{24237D38-023F-447E-A1BC-74580F3177CC} = {3C674304-38CC-47E0-B537-27AFEFD3212A}
+		{76A68DC6-1D72-439D-BBD6-F37418C65A5A} = {3C674304-38CC-47E0-B537-27AFEFD3212A}
+		{8E7D0615-2430-4B59-8739-AF0D18C6A82A} = {24237D38-023F-447E-A1BC-74580F3177CC}
+		{0B60F2FC-4EFA-43D6-8A0F-81AEB821E81B} = {76A68DC6-1D72-439D-BBD6-F37418C65A5A}
+		{7AF7E904-50D5-4167-BC99-28518F9E53AB} = {351D254C-587B-4C0B-A431-DAD6AD995263}
+		{5F6A537E-9CEB-4B0C-8D8C-EB3092C51269} = {3C674304-38CC-47E0-B537-27AFEFD3212A}
+		{650BFC58-BFBE-4255-89EE-6449D93366D3} = {5F6A537E-9CEB-4B0C-8D8C-EB3092C51269}
+		{814321A4-FB67-4D5D-8D30-9D6429639BEB} = {5F6A537E-9CEB-4B0C-8D8C-EB3092C51269}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {D62388E5-EBB7-4A2E-B734-5EBD194A5C2B}
