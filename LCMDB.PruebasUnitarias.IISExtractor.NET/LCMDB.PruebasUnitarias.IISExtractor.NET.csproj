@@ -10,7 +10,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>LCMDB.PruebasUnitarias.IISExtractor.NET</RootNamespace>
     <AssemblyName>LCMDB.PruebasUnitarias.IISExtractor.NET</AssemblyName>
-    <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">15.0</VisualStudioVersion>
@@ -51,11 +51,21 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="UnitTest1.cs" />
+    <Compile Include="PruebaAuxiliar.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\LCMDB.IISExtractor.Modelos\LCMDB.IISExtractor.Modelos.csproj">
+      <Project>{05239dd7-60ec-4e05-a92d-0d26e25545b1}</Project>
+      <Name>LCMDB.IISExtractor.Modelos</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LCMDB.SolucionesAuxiliares.IISExtractor\LCMDB.SolucionesAuxiliares.IISExtractor.csproj">
+      <Project>{15fd457b-7bce-43a8-b8e6-f91a6187e3ab}</Project>
+      <Name>LCMDB.SolucionesAuxiliares.IISExtractor</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
