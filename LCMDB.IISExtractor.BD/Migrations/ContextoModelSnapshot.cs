@@ -172,7 +172,7 @@ namespace LCMDB.IISExtractor.BD.Migrations
                         .HasColumnType("varchar(10)");
 
                     b.Property<string>("TipoEsquema")
-                        .HasColumnType("varchar(10)");
+                        .HasColumnType("varchar(50)");
 
                     b.HasKey("IdVinculante");
 

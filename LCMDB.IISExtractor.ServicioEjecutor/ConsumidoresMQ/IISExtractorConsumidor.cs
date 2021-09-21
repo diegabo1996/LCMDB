@@ -25,18 +25,27 @@ namespace LCMDB.IISExtractor.ServicioEjecutor.ConsumidoresMQ
                     _context.GrupoAplicaciones.Add(pool);
                     await _context.SaveChangesAsync();
                 }
+                Evento.Depuracion(Pools);
                 var SitiosWeb = registrarIIS.ObtenerSitiosWeb();
                 foreach (var Sitio in SitiosWeb)
                 {
-                    Sitio.IdAppPool = Pools.Find(x => x.Nombre == Sitio.NombrePool).IdAppPool;
-                    Sitio.IP = servidor.IP;
-                    foreach (var app in Sitio.Aplicaciones)
+                    try
                     {
-                        app.IP = servidor.IP;
-                        app.IdAppPool = Pools.Find(x => x.Nombre == app.NombrePool).IdAppPool;
+                        Sitio.IdAppPool = Pools.Find(x => x.Nombre == Sitio.NombrePool).IdAppPool;
+                        Sitio.IP = servidor.IP;
+                        foreach (var app in Sitio.Aplicaciones)
+                        {
+                            app.IP = servidor.IP;
+                            app.IdAppPool = Pools.Find(x => x.Nombre == app.NombrePool).IdAppPool;
+                        }
+                        Evento.Depuracion(Sitio);
+                        _context.SitiosWeb.Add(Sitio);
+                        await _context.SaveChangesAsync();
                     }
-                    _context.SitiosWeb.Add(Sitio);
-                    await _context.SaveChangesAsync();
+                    catch (Exception ex)
+                    {
+                        Evento.Error(ex);
+                    }
                 }
             }
             catch (Exception ex)

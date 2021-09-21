@@ -15,6 +15,7 @@ using LCMDB.RegistroEventos.Servidores;
 using NETCore.Base._3._0;
 using BCP.NETCore.Base;
 using AutoMapper;
+using Newtonsoft.Json;
 
 namespace LCMDB.WorkerServices.ServidoresExtractor
 {
@@ -146,6 +147,12 @@ namespace LCMDB.WorkerServices.ServidoresExtractor
                                     }
                                 }
                                 #endregion Puertos
+                                if (contexto.Inv_PuertosServidores.Any(x => x.IP == _servidor.IP && x.Habilitado && x.Producto.Contains("IIS") && x.Version != null && x.Version != "6.0" && x.SistemOperativo == "Windows"))
+                                {
+                                    Servidor SRVRQ= new Servidor() {IP=_servidor.IP, FechaRegistro=DateTime.Now, NombreServidor=_servidor.NombreServidor};
+                                    Api api = new Api();
+                                    api.Post("https://servicios.infracode.bancred.com.bo/LCMDB.IISExtractor.MicroServicio/api/SolicitudExtraccionIIS", JsonConvert.SerializeObject(SRVRQ));
+                                }
                             }
                             RegistroNuevo.Finalizado = true;
                             RegistroNuevo.FechaHoraFin = DateTime.Now;

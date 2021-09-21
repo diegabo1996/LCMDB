@@ -17,6 +17,7 @@ using Microsoft.EntityFrameworkCore;
 using BCP.NETCore.Base;
 using AutoMapper;
 using System.Collections.Generic;
+using Newtonsoft.Json;
 
 namespace LCMDB.WorkerServices.ServidoresExtractorApi
 {
@@ -136,6 +137,7 @@ namespace LCMDB.WorkerServices.ServidoresExtractorApi
                                 foreach (Port Puerto in _servidores.Ports.ToList())
                                 {
                                     PuertosServidores NPuerto = new PuertosServidores() { Habilitado = true, Puerto = Puerto.PortNumber, Nombre = Puerto.Service.Name, Producto = Puerto.Service.Product, SistemOperativo = Puerto.Service.Os, TipoProtocolo = Puerto.Protocol, Version = Puerto.Service.Version, IP = _servidor.IP, FechaRegistro = DateTime.Now , IdRegistro = RegistroNuevo.IdRegistro };
+
                                     try
                                     {
                                         var PuertoActual = contexto.Inv_PuertosServidores.FirstOrDefault(x => x.IP == _servidor.IP && x.Puerto == Puerto.PortNumber);

@@ -14,7 +14,7 @@ namespace LCMDB.IISExtractor.Modelos.v1_0
         [ForeignKey("SitioWeb")]
         public int IdSitioWeb { get; set; }
         public virtual SitioWeb SitioWeb { get; set; }
-        [Column(TypeName = "varchar(10)")]
+        [Column(TypeName = "varchar(50)")]
         public string TipoEsquema { get; set; }
         [Column(TypeName = "varchar(15)")]
         public string IpVinculante { get; set; }

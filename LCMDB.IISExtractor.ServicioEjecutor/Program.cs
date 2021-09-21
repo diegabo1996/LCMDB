@@ -42,6 +42,6 @@ namespace LCMDB.IISExtractor.ServicioEjecutor
                         }));
                     });
                     services.AddMassTransitHostedService();
-                });
+                }).UseWindowsService();
     }
 }
