@@ -52,115 +52,122 @@ namespace LCMDB.WorkerServices.ServidoresExtractor
                         Logs.RegistrarEvento(TipoEvento.Informativo, "Iniciando el procesoX...");
                         Ocupado = true;
                         var Vnets = EstablecerEjecucion();
-                        Logs.RegistrarEvento(TipoEvento.Informativo, "VNets para el proceso...", Vnets);
-                        foreach (SegmentoRed Segmento in Vnets)
+                        if (Vnets != null)
                         {
-                            var RegistroPendiente = contexto.Reg_RegistroEjecucion.Where(x => x.IdSegmento == Segmento.IdSegmento && x.Finalizado == false).FirstOrDefault();
-                            string RedStr = Segmento.IpRed;
-                            if (Segmento.MascaraSegmento != "0")
-                                RedStr += "/" + Segmento.MascaraSegmento;
-                            Logs.RegistrarEvento(TipoEvento.Informativo, "Iniciando proceso de obtención de red " + RedStr + "...");
-                            ScanResult result = null;
-                            var Red = new Target(RedStr);
-                            BD.Contextos.LCMDB.Modelos.v1_0.RegistroEjecucion RegistroNuevo = null;
-                            if (RegistroPendiente != null)
+                            Logs.RegistrarEvento(TipoEvento.Informativo, "VNets para el proceso...", Vnets);
+                            foreach (SegmentoRed Segmento in Vnets)
                             {
-                                RegistroNuevo = RegistroPendiente;
-                                result = new Scanner(Red, System.Diagnostics.ProcessWindowStyle.Hidden).PortScan(RegistroPendiente.Detalle);
-                            }
-                            else
-                            {
-                                result = new Scanner(Red, System.Diagnostics.ProcessWindowStyle.Hidden).PortScan();
-                                RegistroNuevo = new BD.Contextos.LCMDB.Modelos.v1_0.RegistroEjecucion() { FechaHoraInicio = DateTime.Now, FechaHoraFin = DateTime.Now, Finalizado = false, ServicioID = configuracion.ServicioID, Detalle = result.Archivo, IdSegmento = Segmento.IdSegmento };
-                                contexto.Reg_RegistroEjecucion.Add(RegistroNuevo);
-                                await contexto.SaveChangesAsync();
-                            }
-                            VolcarHistorico(Segmento.IdSegmento);
-                            foreach (var _servidores in result.Hosts.ToList())
-                            {
-                                #region Servidor
-                                string NombreServidor = string.Empty;
-                                if (_servidores.Hostnames.ToList().Count > 0)
+                                var RegistroPendiente = contexto.Reg_RegistroEjecucion.Where(x => x.IdSegmento == Segmento.IdSegmento && x.Finalizado == false).FirstOrDefault();
+                                string RedStr = Segmento.IpRed;
+                                if (Segmento.MascaraSegmento != "0")
+                                    RedStr += "/" + Segmento.MascaraSegmento;
+                                Logs.RegistrarEvento(TipoEvento.Informativo, "Iniciando proceso de obtención de red " + RedStr + "...");
+                                ScanResult result = null;
+                                var Red = new Target(RedStr);
+                                BD.Contextos.LCMDB.Modelos.v1_0.RegistroEjecucion RegistroNuevo = null;
+                                if (RegistroPendiente != null)
                                 {
-                                    NombreServidor = _servidores.Hostnames.ToList().FirstOrDefault().ToUpper();
-                                }
-                                if (string.IsNullOrEmpty(NombreServidor)) NombreServidor = _servidores.Address.ToString();
-                                ServidoresHistorico Hist = contexto.Hist_Inv_Servidores.Where(x => x.IP == _servidores.Address.ToString()).OrderByDescending(x => x.FechaRegistroVolcado).FirstOrDefault();
-                                Servidor _servidorAnt = null;
-                                Servidor _servidor = null;
-
-                                if (Hist != null)
-                                {
-                                    _servidorAnt = mapper.Map<Servidor>(Hist);
-                                }
-                                _servidor = new Servidor() { IP = _servidores.Address.ToString(), NombreServidor = NombreServidor, IdRegistro = RegistroNuevo.IdRegistro, FechaRegistro = DateTime.Now };
-                                contexto.Inv_Servidores.Add(_servidor);
-                                await contexto.SaveChangesAsync();
-                                if (Hist == null)
-                                {
-                                    try
-                                    {
-                                        await RegistroServidores.NuevoServidorAsync(_servidor);
-                                    }
-                                    catch (Exception Ex)
-                                    {
-                                        Logs.RegistrarEvento(TipoEvento.Error, Ex, _servidor);
-                                    }
+                                    RegistroNuevo = RegistroPendiente;
+                                    result = new Scanner(Red, System.Diagnostics.ProcessWindowStyle.Hidden).PortScan(RegistroPendiente.Detalle);
                                 }
                                 else
                                 {
-                                    if (_servidorAnt.NombreServidor != NombreServidor)
+                                    result = new Scanner(Red, System.Diagnostics.ProcessWindowStyle.Hidden).PortScan();
+                                    RegistroNuevo = new BD.Contextos.LCMDB.Modelos.v1_0.RegistroEjecucion() { FechaHoraInicio = DateTime.Now, FechaHoraFin = DateTime.Now, Finalizado = false, ServicioID = configuracion.ServicioID, Detalle = result.Archivo, IdSegmento = Segmento.IdSegmento };
+                                    contexto.Reg_RegistroEjecucion.Add(RegistroNuevo);
+                                    await contexto.SaveChangesAsync();
+                                }
+                                VolcarHistorico(Segmento.IdSegmento);
+                                foreach (var _servidores in result.Hosts.ToList())
+                                {
+                                    #region Servidor
+                                    string NombreServidor = string.Empty;
+                                    Api api = new Api();
+                                    if (_servidores.Hostnames.ToList().Count > 0)
                                     {
-                                        string AntiguoNombre = _servidorAnt.NombreServidor;
-                                        await RegistroServidores.CambioNombreAsync(_servidor, AntiguoNombre);
+                                        NombreServidor = _servidores.Hostnames.ToList().FirstOrDefault().ToUpper();
                                     }
-                                }
-                                SO NSo = new SO();
-                                try
-                                {
-                                    //BaseDatos.ObtenerValor(contexto, "TRUNCATE TABLE lcmdb.Inv_SO_Servidores");
-                                    foreach (Os _so in _servidores.OsMatches.ToList())
+                                    if (string.IsNullOrEmpty(NombreServidor)) NombreServidor = _servidores.Address.ToString();
+                                    ServidoresHistorico Hist = contexto.Hist_Inv_Servidores.Where(x => x.IP == _servidores.Address.ToString()).OrderByDescending(x => x.FechaRegistroVolcado).FirstOrDefault();
+                                    Servidor _servidorAnt = null;
+                                    Servidor _servidor = null;
+
+                                    if (Hist != null)
                                     {
-                                        NSo = new SO() { IP = _servidor.IP, Certeza = _so.Certainty, Familia = _so.Family, Generacion = _so.Generation, Nombre = _so.Name, FechaRegistro = DateTime.Now, IdRegistro = RegistroNuevo.IdRegistro };
-                                        contexto.Add(NSo);
-                                        await contexto.SaveChangesAsync();
+                                        _servidorAnt = mapper.Map<Servidor>(Hist);
                                     }
-                                }
-                                catch (Exception Ex)
-                                {
-                                    Logs.RegistrarEvento(TipoEvento.Error, Ex, NSo);
-                                }
-                                #endregion Servidor
-                                #region Puertos
-                                foreach (Port Puerto in _servidores.Ports.ToList())
-                                {
-                                    PuertosServidores NPuerto = new PuertosServidores() { Habilitado = true, Puerto = Puerto.PortNumber, Nombre = Puerto.Service.Name, Producto = Puerto.Service.Product, SistemOperativo = Puerto.Service.Os, TipoProtocolo = Puerto.Protocol, Version = Puerto.Service.Version, IP = _servidor.IP, FechaRegistro = DateTime.Now, IdRegistro = RegistroNuevo.IdRegistro };
+                                    _servidor = new Servidor() { IP = _servidores.Address.ToString(), NombreServidor = NombreServidor, IdRegistro = RegistroNuevo.IdRegistro, FechaRegistro = DateTime.Now };
+                                    contexto.Inv_Servidores.Add(_servidor);
+                                    await contexto.SaveChangesAsync();
+                                    if (Hist == null)
+                                    {
+                                        try
+                                        {
+                                            await RegistroServidores.NuevoServidorAsync(_servidor);
+                                        }
+                                        catch (Exception Ex)
+                                        {
+                                            Logs.RegistrarEvento(TipoEvento.Error, Ex, _servidor);
+                                        }
+                                    }
+                                    else
+                                    {
+                                        if (_servidorAnt.NombreServidor != NombreServidor)
+                                        {
+                                            string AntiguoNombre = _servidorAnt.NombreServidor;
+                                            await RegistroServidores.CambioNombreAsync(_servidor, AntiguoNombre);
+                                        }
+                                    }
+                                    SO NSo = new SO();
                                     try
                                     {
-                                        var PuertoActual = contexto.Inv_PuertosServidores.FirstOrDefault(x => x.IP == _servidor.IP && x.Puerto == Puerto.PortNumber);
-                                        contexto.Inv_PuertosServidores.Add(NPuerto);
-                                        await contexto.SaveChangesAsync();
+                                        //BaseDatos.ObtenerValor(contexto, "TRUNCATE TABLE lcmdb.Inv_SO_Servidores");
+                                        foreach (Os _so in _servidores.OsMatches.ToList())
+                                        {
+                                            NSo = new SO() { IP = _servidor.IP, Certeza = _so.Certainty, Familia = _so.Family, Generacion = _so.Generation, Nombre = _so.Name, FechaRegistro = DateTime.Now, IdRegistro = RegistroNuevo.IdRegistro };
+                                            contexto.Add(NSo);
+                                            await contexto.SaveChangesAsync();
+                                        }
+                                        if (_servidores.OsMatches.Any(x => x.Family == "Windows"))
+                                        {
+                                            Servidor SRVRQWS = new Servidor() { IP = _servidor.IP, FechaRegistro = DateTime.Now, NombreServidor = _servidor.NombreServidor };
+                                            api.Post("https://servicios.infracode.bancred.com.bo/LCMDB.WSExtractor.MicroServicio/api/SolicitudExtraccionWS", JsonConvert.SerializeObject(SRVRQWS));
+                                        }
                                     }
                                     catch (Exception Ex)
                                     {
-                                        Logs.RegistrarEvento(TipoEvento.Error, Ex, NPuerto);
+                                        Logs.RegistrarEvento(TipoEvento.Error, Ex, NSo);
+                                    }
+                                    #endregion Servidor
+                                    #region Puertos
+                                    foreach (Port Puerto in _servidores.Ports.ToList())
+                                    {
+                                        PuertosServidores NPuerto = new PuertosServidores() { Habilitado = true, Puerto = Puerto.PortNumber, Nombre = Puerto.Service.Name, Producto = Puerto.Service.Product, SistemOperativo = Puerto.Service.Os, TipoProtocolo = Puerto.Protocol, Version = Puerto.Service.Version, IP = _servidor.IP, FechaRegistro = DateTime.Now, IdRegistro = RegistroNuevo.IdRegistro };
+                                        try
+                                        {
+                                            var PuertoActual = contexto.Inv_PuertosServidores.FirstOrDefault(x => x.IP == _servidor.IP && x.Puerto == Puerto.PortNumber);
+                                            contexto.Inv_PuertosServidores.Add(NPuerto);
+                                            await contexto.SaveChangesAsync();
+                                        }
+                                        catch (Exception Ex)
+                                        {
+                                            Logs.RegistrarEvento(TipoEvento.Error, Ex, NPuerto);
+                                        }
+                                    }
+                                    #endregion Puertos
+                                    if (contexto.Inv_PuertosServidores.Any(x => x.IP == _servidor.IP && x.Habilitado && x.Producto.Contains("IIS") && x.Version != null && x.Version != "6.0" && x.SistemOperativo == "Windows"))
+                                    {
+                                        Servidor SRVRQ = new Servidor() { IP = _servidor.IP, FechaRegistro = DateTime.Now, NombreServidor = _servidor.NombreServidor };
+                                        api.Post("https://servicios.infracode.bancred.com.bo/LCMDB.IISExtractor.MicroServicio/api/SolicitudExtraccionIIS", JsonConvert.SerializeObject(SRVRQ));
                                     }
                                 }
-                                #endregion Puertos
-                                if (contexto.Inv_PuertosServidores.Any(x => x.IP == _servidor.IP && x.Habilitado && x.Producto.Contains("IIS") && x.Version != null && x.Version != "6.0" && x.SistemOperativo == "Windows"))
-                                {
-                                    Servidor SRVRQ= new Servidor() {IP=_servidor.IP, FechaRegistro=DateTime.Now, NombreServidor=_servidor.NombreServidor};
-                                    Api api = new Api();
-                                    api.Post("https://servicios.infracode.bancred.com.bo/LCMDB.IISExtractor.MicroServicio/api/SolicitudExtraccionIIS", JsonConvert.SerializeObject(SRVRQ));
-                                }
+                                RegistroNuevo.Finalizado = true;
+                                RegistroNuevo.FechaHoraFin = DateTime.Now;
+                                contexto.Entry(RegistroNuevo).State = EntityState.Modified;
+                                //contexto.Reg_RegistroEjecucion.Add(RegistroNuevo);
+                                await contexto.SaveChangesAsync();
                             }
-                            RegistroNuevo.Finalizado = true;
-                            RegistroNuevo.FechaHoraFin = DateTime.Now;
-                            contexto.Entry(RegistroNuevo).State = EntityState.Modified;
-                            //contexto.Reg_RegistroEjecucion.Add(RegistroNuevo);
-                            await contexto.SaveChangesAsync();
                         }
-
                         //await Task.Delay(5000, stoppingToken);
                         Logs.RegistrarEvento(TipoEvento.Informativo, "Fin proceso de registro...");
                         EstablecerEjecucion();

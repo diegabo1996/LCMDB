@@ -35,7 +35,6 @@ namespace LCMDB.SolucionesAuxiliares.IISExtractor
                     aplicacionPool.Usuario = pool.ProcessModel.UserName;
                     aplicacionPool.Contrasenia = pool.ProcessModel.Password;
                     aplicacionPool.FechaHoraRegistro = DateTime.Now;
-                    aplicacionPool.FechaRegistro = DateTime.Now;
                     ListaPools.Add(aplicacionPool);
                 }
                 ListaSitiosWeb = new List<SitioWeb>();
@@ -47,7 +46,6 @@ namespace LCMDB.SolucionesAuxiliares.IISExtractor
                     sitioWeb.Estado = ((Estado)((int)Sitio.State));
                     //sitioWeb.NombrePool=Sitio
                     sitioWeb.FechaHoraRegistro = DateTime.Now;
-                    sitioWeb.FechaRegistro = DateTime.Now;
                     sitioWeb.Aplicaciones = new List<Aplicacion>();
                     foreach (var App in Sitio.Applications)
                     {

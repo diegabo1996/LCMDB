@@ -23,8 +23,9 @@ namespace LCMDB.IISExtractor.Modelos.v1_0
         public Estado Estado{ get; set; }
         [Column(TypeName = "varchar(500)")]
         public string RutaFisica { get; set; }
-        [Column(TypeName = "Date")]
-        public DateTime FechaRegistro { get; set; }
+        [ForeignKey("RegistroEjecucion")]
+        public int IdRegistro { get; set; }
+        public virtual RegistroEjecucion RegistroEjecucion { get; set; }
         public DateTime FechaHoraRegistro { get; set; }
         public ICollection<Vinculante> Vinculantes { get; set; }
         public ICollection<Aplicacion> Aplicaciones { get; set; }

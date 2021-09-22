@@ -26,8 +26,9 @@ namespace LCMDB.IISExtractor.Modelos.v1_0
         public string Usuario { get; set; }
         [Column(TypeName = "varchar(500)")]
         public string Contrasenia { get; set; }
-        [Column(TypeName = "Date")]
-        public DateTime FechaRegistro { get; set; } 
+        [ForeignKey("RegistroEjecucion")]
+        public int IdRegistro { get; set; }
+        public virtual RegistroEjecucion RegistroEjecucion { get; set; }
         public DateTime FechaHoraRegistro { get; set; } 
     }
     public enum Estado
